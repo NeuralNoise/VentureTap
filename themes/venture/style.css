@@ -1,0 +1,3249 @@
+/******************** All pages ********************/
+
+body {
+  background: url(images/bg.gif);
+  font-family: Verdana;
+  font-size: 12px;
+  line-height: 17px;
+  margin: 0;
+}
+
+#corner {
+  width: 918px;
+  height: 19px;
+  margin:auto;
+  background: url(images/corner.png);
+}
+
+#border {
+  width: 918px;
+  margin:auto;
+  background: url(images/border.png);
+}
+
+#container {
+  width: 900px;
+  margin: auto;
+  background-color: white;
+}
+
+#menu {
+  background-color: #424242;
+  height: 50px;
+  border-top: 4px solid #e74a07;
+}
+
+#menu img {
+  float: left;
+  margin: 11px 10px 0px 20px;
+}
+
+#menu-acct {
+  float: left;
+  color: white;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-right: 5px;
+}
+
+#menu-acct div {
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+#menu-acct a {
+  color: yellow;
+  font-size: 11px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+#menu-acct a:hover {
+  text-decoration: underline;
+}
+
+#menu-links {
+  float: left;
+  margin-top: 11px;
+}
+
+#menu-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Trebuchet MS,Arial,sans-serif;
+  font-size: 13px;
+  padding: 3px 8px;
+  line-height: 20px;
+  margin: 0px 3px;
+  float: left;
+}
+
+#menu-links a:hover {
+  background-color: #5a5a5a;
+}
+
+#menu-links a.selected,
+#menu-links a.selected:hover {
+  background-color: #e74a07;
+}
+
+#search-block-form {
+  float: left;
+  margin: 12px 0px 0px 10px;
+}
+
+#search-block-form .form-item {
+  margin: 0;
+  float: left;
+  font-size: 0;
+}
+
+#search-block-form .form-item input {
+  width: 100px;
+  font-family: verdana;
+  font-size: 11px;
+  padding: 3px;
+}
+
+#search-btn {
+  float: left;
+  margin-left: 7px;
+}
+
+#menu-slogan {
+  float: right;
+  padding: 16px 15px 0px 0px;
+  font-size: 11px;
+  color: #f9f890;
+}
+
+#menu-signin {
+  float: right;
+  margin: 11px 15px 0px 0px;
+  background: url(images/login.png);
+  width: 77px;
+  height: 21px;
+  font-family: Arial;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  padding: 5px 0px 0px 19px;
+  cursor: pointer;
+}
+
+#menu-signin:hover {
+  color: #e74a07;
+}
+
+#shadow {
+  height: 10px;
+  background: url(images/shadow.gif);
+  font-size: 0px;
+}
+
+#content {
+  height: 100%;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+#footer {
+  clear: both;
+  background-color: #dedede;
+  font-size: 11px;
+  height: 22px;
+  color: #504f4f;
+  padding: 13px 20px 3px;
+  overflow: auto;
+  height: 100%;
+}
+
+#footer #copyright {
+  float: left; 
+}
+
+#footer #footer-links {
+  float: right;
+}
+
+#footer a {
+  color: #323991;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+}
+
+/******************** Common UI elements ********************/
+
+* {
+  _word-wrap: break-word;
+}
+
+a {
+  color: blue;
+}
+
+p {
+  margin: 0;
+  padding: 6px 0px;
+}
+
+tbody {
+  border: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.messages {
+  font-weight: bold;
+  margin: 5px 15px;
+  padding: 10px 20px;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+.messages ul {
+  list-style: disc;
+  padding-left: 15px;
+}
+
+div.status {
+  color: #228a22;
+  border: 1px solid #63d363;
+  background-color: #e9f9ea;
+}
+
+div.error {
+  color: #c52020;
+  border: 1px solid #dd7777;
+  background-color: #ffcccc;
+}
+
+div.warning {
+  color: #c55e20;
+  border: 1px solid #dda077;
+  background-color: #ffddcc;
+}
+
+.form-item {
+  _word-wrap: normal;
+}
+
+.form-submit {
+  height: 30px;
+  border: 1px solid gray;
+  cursor: pointer;
+  font-family: verdana;
+  font-weight: bold;
+  background:url(images/tab.png);
+  font-size: 11px;
+}
+
+.form-submit:hover {
+  border-width: 2px;
+}
+
+.page-title {
+  background-color: #dedede;
+  padding: 5px 20px;
+  height: 22px;
+  white-space: nowrap;
+}
+
+.page-title h1 {
+  margin: 0;
+  line-height: 20px;
+  font-size: 17px;
+  font-family: Arial;
+  float: left;
+}
+
+.page-title .current-view {
+  float: right;
+}
+
+.page-title .current-view * {
+  float: left;
+}
+
+.page-title .current-view label {
+  margin: 2px 7px 0px 0px;
+}
+
+.desc-container {
+  border: 3px solid #dedede;
+  border-top: 0;
+  margin: 0px 15px 15px;
+  padding: 10px 15px;
+  background-color: #fafafa;
+  height: 100%;
+  overflow: hidden;
+}
+
+.desc-container img {
+  float: left;
+  margin: 3px 15px 0px 5px;
+}
+
+.page-desc {
+  overflow: hidden;
+  width: 760px;
+}
+
+.page-desc ul {
+  list-style: square;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.pager {
+  font-size: 11px;
+  font-weight: bold;
+  text-align: right;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pager-links {
+  margin-left: 15px;
+  color: Gray;
+  font-weight: normal;
+}
+
+.pager a {
+  padding: 0;
+}
+
+.pager div {
+  float: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.record {
+  background-color: #f6f6f6;
+  border: 1px solid #c0c0c0;
+  margin-top: 15px;
+}
+
+.record .record-header {
+  background-color: #dedede;
+  font-size: 11px;
+  line-height: 25px;
+  padding: 0px 15px;
+  white-space: nowrap;
+  height: 100%;
+  overflow: hidden;
+}
+
+.record .record-name {
+  float: left;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.record .record-status {
+  color: #6f6e6e;
+  margin-left: 10px;
+  float: left;
+}
+
+.record .record-misc {
+  float: right;
+}
+
+.record .record-main {
+  padding: 10px 15px 15px;
+  font-size: 11px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.record .record-main img {
+  float: left;
+  margin: 5px 20px 0px 0px;
+}
+
+.record .record-summary td {
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.record .record-summary-value {
+  font-weight: normal;
+  overflow: hidden;
+}
+
+.record .record-actions {
+  float: right;
+  line-height: 19px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.record .record-actions div {
+  display: none;
+}
+
+.search-hidden {
+  display: none;
+}
+
+.search-basic {
+  height: 100%;
+  overflow: hidden;
+  background-color: #dfdff8;
+  padding: 10px 25px;
+}
+
+.search-basic *,
+.search-basic .form-item *,
+.search-row .form-item {
+  float: left;
+}
+
+.search-basic .form-item {
+  height: 100%;
+  overflow: hidden;
+  margin: 5px 0px 0px 0px;
+}
+
+.search-basic .form-text {
+  width: 250px;
+  margin: 0px 10px;
+}
+
+.search-basic .form-submit {
+  width: 80px;
+}
+
+.search-adv-link div,
+.search-basic-link div {
+  padding: 5px 5px 0px 15px;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.search-basic img {
+  margin-top: 7px;
+}
+
+.search-adv {
+  height: 100%;
+  overflow: hidden;
+  background-color: #f4f4fd;
+  border: 2px solid #dfdff8;
+  border-top: 0px;
+  padding: 10px 20px 20px;
+}
+
+.search-row {
+  height: 100%;
+  overflow: hidden;
+  padding-top: 15px;
+}
+
+.search-adv .form-item {
+  margin: 0;
+}
+
+.search-adv label {
+  margin-bottom: 5px;
+}
+
+.search-adv .form-select,
+.search-adv .form-text {
+  margin-right: 20px;
+}
+
+.filefield-item {
+  margin-bottom: 10px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.filefield-item div div {
+  display: none;
+}
+
+.filefield-item object,
+.filefield-item embed {
+  margin: 5px 0px 0px 20px;
+}
+
+/******************** Tooltip widget ********************/
+
+#tooltip {
+  position: absolute;
+  top: 0; /* avoid flicker in FF */
+  z-index: 3000;
+  border: 1px solid black;
+  background-color: #fcfbaf;
+  padding: 5px;
+  max-width: 400px;
+}
+
+#tooltip h3 {
+  margin: 0px 0px 5px 0px;
+  font-size: 14px;
+}
+
+/******************** Tab widget ********************/
+
+.tabset {
+  display: none;
+}
+
+.ui-tabs-nav,
+.ui-tabs-nav li,
+.ui-tabs-nav li a,
+.ui-tabs-panel {
+  margin: 0; 
+  padding: 0; 
+  border: 0; 
+  outline: 0; 
+  text-decoration: none; 
+  font-size: 100%; 
+  list-style: none;
+}
+
+.ui-tabs-nav {
+  font-family: Verdana, Arial, sans-serif;
+  float: left;
+  position: relative;
+  z-index: 1;
+  border-right: 1px solid #c0c0c0;
+  bottom: -1px;
+  margin-left: 10px;
+  display: block;
+}
+
+.ui-tabs-nav li {
+  float: left;
+  border: 1px solid #c0c0c0;
+  border-right: none;
+}
+
+.ui-tabs-nav li a {
+  float: left;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  padding: .5em 1.7em;
+  color: gray;
+  background: url(images/tab.png);
+}
+
+.ui-tabs-nav li a:hover {
+  background: url(images/tab-hover.png);
+  color: black;
+}
+
+li.ui-tabs-selected {
+  border-bottom-color: #ffffff;
+}
+
+li.ui-tabs-selected a, 
+li.ui-tabs-selected a:hover {
+  background: #ffffff;
+  color: black;
+}
+
+.ui-tabs-panel {
+  font-family: Verdana, Arial, sans-serif;
+  border-top: 1px solid #c0c0c0;
+  background: #ffffff;
+  color: #222222;
+  clear: both;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ui-tabs-hide {
+  display: none;/* for accessible hiding: position: absolute; left: -99999999px*/;
+}
+
+/******************** Dialog widget ********************/
+
+.ui-dialog {
+  background-color: white;
+  position: absolute;
+  top: 0; /* avoid flicker in FF */
+  border: 1px solid black;
+  padding: 2px;
+  margin-top: -100px;
+  width: 100px;
+}
+
+.ui-dialog-container {
+  padding-bottom: 60px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  border-bottom: 1px solid #d8d2aa;
+  background: #ff9900;
+  padding: 0px;
+  height: 28px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  width: 16px;
+  height: 16px;
+  background: url(images/close.png) no-repeat;
+  position:absolute;
+  top: 6px;
+  right: 7px;
+  cursor: pointer;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span {
+  display: none;
+}
+
+.ui-dialog .ui-dialog-titlebar-close-hover {
+  background: url(images/close-hover.png) no-repeat;
+}
+
+.ui-dialog .ui-dialog-title {
+  margin-left: 5px;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  top: 5px;
+  left: 4px;
+}
+
+.ui-dialog .ui-dialog-content {
+  margin: 10px 10px 0px;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 100%;
+  text-align: right;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+  margin: 0px 0px 10px 6px;
+  height: 30px;
+  width: 70px;
+  border: 1px solid gray;
+  cursor: pointer;
+  font-family: verdana;
+  font-weight: bold;
+  background:url(images/tab.png);
+  font-size: 11px;
+}
+
+.ui-dialog .ui-dialog-buttonpane button:hover {
+  border-width: 2px;
+}
+
+/******************** User profile page ********************/
+
+#user-profile #main-left {
+  width: 648px;
+  float: left;
+  border-right: 3px solid #dedede;
+  margin-right: -3px;
+}
+
+#user-profile #main-right {
+  width: 249px;
+  float: left;
+  border-left: 3px solid #dedede;
+}
+
+#user-profile #main-left .page-title h1 {
+  max-width: 470px;
+  overflow: hidden;
+}
+
+#user-profile #main-right .page-title {
+  padding: 5px 10px;
+  height: 17px;
+}
+
+#user-profile #main-right .page-title h1 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#user-profile .page-title a {
+  font-size: 11px;
+  line-height: 14px;
+  font-family: Arial;
+  font-weight: bold;
+  float: right;
+}
+
+#user-profile #main-left .section {
+  margin: 10px 20px 50px;
+  overflow: hidden;
+}
+
+#user-profile #main-right .section {
+  margin: 10px 12px 15px;
+}
+
+#user-profile .record-status {
+  font-size: 11px;
+  color: #6f6e6e;
+  margin: 2px 0px 0px 10px;
+  float: left;
+}
+
+#user-profile #contact {
+  background-color: #f6f6f6;
+  border: 1px solid #d2d2d2;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+}
+
+#user-profile #contact-info {
+  float: left;
+}
+
+#user-profile #contact-info td {
+  font-weight: bold;
+  vertical-align: top;
+  padding: 3px 10px 3px 0px;
+}
+
+#user-profile .contact-value {
+  font-weight: normal;
+  width: 295px;
+  overflow: hidden;
+}
+
+#user-profile .record-actions {
+  float: right;
+  white-space: nowrap;
+  line-height: 23px;
+}
+
+#user-profile .record-actions div {
+  display: none;
+}
+
+#user-profile .record-summary td {
+  font-weight: bold;
+  vertical-align: top;
+  padding: 3px 10px 3px 0px;
+  white-space: nowrap;
+}
+
+#user-profile .record-summary-value {
+  font-weight: normal;
+  width: 430px;
+  overflow: hidden;
+  white-space: normal;
+}
+
+#user-profile #main-left h2 {
+  font-size: 12px;
+  text-decoration: underline;
+  margin: 15px 0px 0px 0px;
+}
+
+#user-profile #main-right img {
+  display: block;
+  margin-top: -10px;
+}
+
+#user-profile #main-right li {
+  font-size: 11px;
+  margin-bottom: 7px;  
+  line-height: 15px;
+  overflow: hidden;
+}
+
+#user-profile #network-summary td {
+  vertical-align: top;
+  font-size: 11px;
+  padding-bottom: 7px;
+  line-height: 15px;
+  text-align: right;
+  width: 100%;
+  color: #898989;
+  white-space: nowrap;
+}
+
+#user-profile .user-name {
+  float: left;
+  text-align: left;
+  width: 180px;
+  overflow: hidden;
+  white-space: normal;
+}
+
+#user-profile .total {
+  margin: 20px 0px;
+  border-bottom: 2px solid #dedede;
+  text-align: center;
+  line-height: 0px;
+}
+
+#user-profile .total span {
+  background-color: white;
+  padding: 0px 10px;
+  color: #696969;
+  font-size: 11px;
+}
+
+#user-profile #non-accredited {
+  color: gray;
+  margin: 10px 0px;
+  font-size: 11px;
+}
+
+/******************** User account page ********************/
+
+#user-account .tab-panel {
+  margin: 20px;
+  border: 1px solid #d2d2d2;
+}
+
+#user-account .tab-info {
+  padding: 10px 20px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #d2d2d2;
+}
+
+#user-account .tab-content {
+  padding: 20px 10px 5px 20px;
+}
+
+#user-account .form-item,
+#user-account #geo-area {
+  margin: 0px 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-account .contact .form-item label,
+#user-account #criteria .form-item label,
+#user-account .advanced .form-item label {
+  float: left;
+}
+
+#user-account #submission .form-item label,
+#user-account .experience .form-item label,
+#user-account .photo .form-item label {
+  margin-bottom: 5px;
+}
+
+#user-account .contact .form-item label {
+  width: 100px;
+}
+
+#user-account #criteria .form-item label {
+  width: 180px;
+}
+
+#user-account .advanced .form-item label {
+  width: 140px;
+}
+
+#user-account .form-checkboxes {
+  float: left;
+  width: 600px;
+  margin: 0;
+}
+
+#user-account .form-checkboxes .form-item {
+  float: left;
+  margin: 0px 0px 5px 0px;
+  width: 180px;
+}
+
+#user-account .form-checkboxes label.option {
+  width: auto;
+  padding: 0;
+}
+
+#user-account .form-checkboxes input,
+#user-account .imagefield-edit-image-detail input {
+  width: 13px;
+  height: 13px;
+  margin: 2px 5px 0px 0px;
+  float: left;
+}
+
+#user-account #geo-area .form-item {
+  float: left;
+  margin: 0px 15px 0px 0px;
+}
+
+#user-account #criteria .form-item .description {
+  margin: 0px 0px 0px 10px;
+  padding: 0;
+  background: none;
+  border: none;
+  float: left;
+  width: 205px;
+}
+
+#user-account .form-text, 
+#user-account .form-select {
+  width: auto;
+  float: left;
+}
+
+#user-account #field-photo-attach-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-account #field-photo-attach-wrapper div.error {
+  color: #c52020;
+  border: 1px solid #dd7777;
+  background-color: #ffcccc;
+  margin: 0px 0px 20px 0px;
+}
+
+#user-account #image-container {
+  float: left;
+}
+
+#user-account .imagefield-edit-image-row {
+  float: left;
+  border: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  width: 250px;
+}
+
+#user-account .imagefield-edit-image-row img {
+  border: none;
+}
+
+#user-account .imagefield-edit-image-row * {
+  float: none;
+  margin: 0;
+}
+
+#user-account .imagefield-edit-image-detail {
+  margin-top: 10px;
+}
+
+#user-account #field-photo-attach-hide .form-item {
+  float: none;
+}
+
+#user-account #field-photo-attach-button {
+  margin: 0;
+  font-weight: normal;
+  width: 80px;
+}
+
+#user-account .advanced .form-checkboxes .form-item {
+  width: 240px;
+}
+
+#user-account #current-pass {
+  background-color: #ffe5e5;
+  padding: 20px 20px 15px;
+  margin-top: -10px;
+}
+
+#user-account #current-pass .form-item {
+  margin: 0;
+}
+
+#user-account #actions {
+  height: 100%;
+  overflow: hidden;
+  padding: 0px 0px 25px 20px;
+}
+  
+#user-account .form-submit {
+  float: left;
+  width: 130px;
+}
+
+#user-account #actions a {
+  float: left;
+  margin: 7px 0px 0px 10px;
+}
+
+/******************** Network page ********************/
+
+#user-network .page-title h1 {
+  width: 620px;
+  overflow: hidden;
+}
+
+#user-network #network {
+  padding: 0px 20px;
+}
+
+#user-network #edit-filter1,
+#user-network #edit-filter4,
+#user-network #edit-filter8 {
+  width: 250px;
+}
+
+#user-network #edit-filter2,
+#user-network #edit-filter5,
+#user-network #edit-filter9 {
+  width: 180px;
+}
+
+#user-network #edit-filter3 {
+  width: 295px;
+}
+
+#user-network #edit-filter6,
+#user-network #edit-filter7,
+#user-network #edit-filter10,
+#user-network #edit-filter11 {
+  width: 140px;
+}
+
+#user-network .record-name {
+  max-width: 450px;
+}
+
+#user-network .record-summary {
+  float: left;
+  margin-bottom: -5px;
+}
+
+#user-network .record-summary td {
+  width: 170px;
+}
+
+#user-network .record-summary-value {
+  width: 320px;
+}
+
+#user-network .pager {
+  margin: 15px 5px 0px 0px;
+}
+
+#user-network #no-results {
+  margin-top: 15px;
+}
+
+#user-network #invite {
+  font-family: Arial;
+  text-align: center;
+  color: #5f6179;
+  margin: 20px 0px;
+}
+
+/******************** Invite page ********************/
+
+#user-invite {
+  padding: 0px 20px 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-invite #invite-main {
+  width: 590px;
+  float: left;
+}
+
+#user-invite h1 {
+  margin: 0px 0px 10px 0px;
+  font-size: 17px;
+  font-family: Arial;
+  background-color: #dedede;
+  padding: 7px 15px;
+}
+
+#user-invite img {
+  float: left;
+  margin: 11px 20px 0px 10px;
+}
+
+#user-invite #page-description {
+  margin: 0px 20px 10px 0px;
+}
+
+#user-invite .form-item label {
+  margin: 15px 0px 5px;
+}
+
+#user-invite .description {
+  margin-top: 5px;
+}
+
+#user-invite .form-submit {
+  width: 80px;
+  margin-top: 10px;
+}
+
+#user-invite #invitations {
+  background-color: #f1f3fc;
+  width: 250px;
+  float: right;
+  font-size: 11px;
+}
+
+#user-invite #invitations-title {
+  background-color: #d7dcf1;
+  border-bottom: 1px solid #b3bbdd;
+  padding: 5px 10px;
+  height: 100%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#user-invite h2 {
+  margin: 0;
+  float: left;
+  font-size: 11px;
+}
+
+#user-invite #invitations-title a {
+  display: block;
+  float: right;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+#user-invite .invite-type {
+  margin: 0px 0px 10px 10px;
+  font-weight: bold;
+  color: #454f7f;
+}
+
+#user-invite ul {
+  margin: 0px 20px;
+  color: #6a7298;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+#user-invite .total {
+  margin: 20px;
+  border-bottom: 2px solid #d7dcf1;
+  text-align: center;
+  line-height: 0px;
+}
+
+#user-invite .total span {
+  background-color: #f1f3fc;
+  padding: 0px 10px;
+  color: #6a7298;
+  font-size: 11px;
+}
+
+/******************** Invite history page ********************/
+
+#invite-history #invites {
+  padding: 0px 20px 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#invite-history table {
+  width: 100%;
+  white-space: nowrap;
+  line-height: 20px;
+}
+
+#invite-history th {
+  background-color: #7e7e7e;
+  border: 0;
+  padding: 5px 10px;
+  color: White;
+}
+
+#invite-history .even {
+  background-color: White;
+}
+
+#invite-history td {
+  padding: 3px 10px;
+  border-bottom: 1px solid #dedede;
+}
+
+#invite-history .email {
+  font-weight: bold;
+  width: 400px;
+  overflow: hidden;
+}
+
+#invite-history .pending {
+  color: Gray;
+}
+
+#invite-history .accepted {
+  color: Green;
+  font-weight: bold;
+}
+
+#invite-history .expired {
+  color: Red;
+  font-weight: bold;
+}
+
+#invite-history #return {
+  float: left;
+  margin-top: 15px;
+}
+
+/******************** PM list page ********************/
+
+#pm-list-folder .page-desc a {
+  margin: 5px 10px 0px 0px;
+  float: left;
+}
+
+#pm-list-folder .container-inline {
+  float: right;
+}
+
+#pm-list-folder .container-inline select {
+  float: left;
+}
+
+#pm-list-folder .container-inline label {
+  float: left;
+  margin: 2px 7px 0px 0px;
+}
+
+#pm-list-folder .container-inline .js-hide {
+  display: none;
+}
+
+#pm-list-folder label {
+  font-weight: normal;
+  margin-right: 5px;
+}
+
+#pm-list-msg {
+  padding: 0px 20px 20px;
+}
+
+#pm-list-msg #privatemsg_message_table {
+  width: 100%;
+  line-height: 20px;
+}
+
+#pm-list-msg th {
+  background-color: #7e7e7e;
+  border: 0;
+  padding: 5px 5px 5px 10px;  
+}
+
+#pm-list-msg th a {
+  color: White;
+}
+
+#pm-list-msg .even {
+  background-color: White;
+}
+
+#pm-list-msg td {
+  padding: 3px 5px 3px 10px;
+  border-bottom: 1px solid #dedede;
+}
+
+#pm-list-msg .name {
+  width: 150px;
+  overflow: hidden;
+}
+
+#pm-list-msg .subject {
+  width: 450px;
+  overflow: hidden;
+}
+
+#pm-list-msg .pager {
+  margin: 10px 10px 0px 0px;
+}
+
+#pm-list-msg .form-submit {
+  width: 130px;
+  margin-top: -10px;
+}
+
+/******************** New PM page ********************/
+
+#pm-new #pm-new-form {
+  padding: 0px 20px 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#pm-new table {
+  width: 503px;
+}
+
+#pm-new tr {
+  border: 0;
+  vertical-align: middle;
+}
+
+#pm-new tr.odd td {
+  padding: 10px 0px 7px 10px;
+}
+
+#pm-new tr.even td {
+  padding: 0px 0px 10px 10px;
+}
+
+#pm-new .title-cell {
+  width: 60px;
+}
+
+#pm-new label {
+  margin-bottom: 5px;
+}
+
+#pm-new select {
+  width: 200px;
+}
+
+#pm-new #recipient {
+  width: 400px;
+  overflow: hidden;
+}
+
+#pm-new textarea {
+  width: 500px;
+  height: 150px;
+}
+
+#pm-new .form-submit {
+  width: 130px;
+  float: left;
+}
+
+#pm-new #cancel {
+  float: left;
+  margin: 6px 0px 0px 10px;
+}
+
+#pm-new #return {
+  float: left;
+  margin-top: 15px;
+}
+
+/******************** View PM page ********************/
+
+#pm-view #pm-view-msg {
+  padding: 0px 20px 20px;
+}
+
+#pm-view #msg-container {
+  border: 2px solid #dedede;
+  padding: 3px;
+  overflow: hidden;
+}
+
+#pm-view #msg-header {
+  background-color: #eeeeee;
+  border-bottom: 2px solid #dedede;
+  padding: 7px 10px;
+  overflow: hidden;
+}
+
+#pm-view #message {
+  padding: 10px 15px;
+  background-color: #fafafa;
+}
+
+#pm-view td {
+  padding-bottom: 3px;
+}
+
+#pm-view .title-cell {
+  font-weight: bold;
+  text-align: right;
+  vertical-align: top;
+  padding-right: 5px;
+}
+
+#pm-view #actions {
+  margin-top: 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#pm-view form {
+  float: left;
+}
+
+#pm-view .form-item {
+  margin: 0;
+}
+
+#pm-view .form-submit {
+  width: 80px;
+  margin: 0px 5px 0px 0px;
+}
+
+#pm-view #actions a {
+  float: left;
+  margin: 6px 0px 0px 5px;
+}
+
+/******************** Groups page ********************/
+
+#user-groups .page-title h1 {
+  width: 620px;
+  overflow: hidden;
+}
+
+#user-groups #groups {
+  padding: 0px 20px 20px;
+}
+
+#user-groups #edit-filter1,
+#user-groups #edit-filter2 {
+  width: 150px;
+}
+
+#user-groups .record-name {
+  max-width: 600px;
+}
+
+#user-groups .record-summary-container {
+  float: left;
+  margin-bottom: -5px;
+  width: 480px;
+  overflow: hidden;
+}
+
+#user-groups .record-summary {
+  margin-top: 10px;
+}
+
+#user-groups .record-summary td {
+  width: 70px;
+}
+
+#user-groups .record-summary-value {
+  width: 400px;
+}
+
+#user-groups .pager {
+  margin: 15px 5px 0px 0px;
+}
+
+#user-groups #no-results {
+  margin-top: 15px;
+}
+
+/******************** Group view page ********************/
+
+#group-view #main-left {
+  width: 648px;
+  float: left;
+  border-right: 3px solid #dedede;
+  margin-right: -3px;
+}
+
+#group-view #main-right {
+  width: 249px;
+  float: left;
+  border-left: 3px solid #dedede;
+}
+
+#group-view #main-left .page-title h1 {
+  max-width: 460px;
+  overflow: hidden;
+}
+
+#group-view #main-right .page-title {
+  padding: 5px 10px;
+  height: 17px;
+}
+
+#group-view #main-right .page-title h1 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#group-view .page-title a {
+  font-size: 11px;
+  line-height: 14px;
+  font-family: Arial;
+  font-weight: bold;
+  float: right;
+}
+
+#group-view #main-left .section {
+  margin: 15px 20px 20px;
+  overflow: hidden;
+}
+
+#group-view #main-right .section {
+  margin: 10px 12px 15px;
+}
+
+#group-view .record-status {
+  font-size: 11px;
+  color: #6f6e6e;
+  margin: 2px 0px 0px 10px;
+  float: left;
+}
+
+#group-view #group-desc {
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+#group-view #join-msg {
+  font-size: 11px;
+  font-weight: bold;
+  color: #9e2323;
+}
+
+#group-view #requests-all {
+  text-align: right;
+}
+
+#group-view #requests-all a {
+  font-size: 11px;
+  margin-left: 10px;
+}
+
+#group-view #requests {
+  border: 2px solid #f8c5af;
+  margin: 5px 0px 15px;
+  padding: 7px 10px 5px;
+}
+
+#group-view #requests td {
+  padding-bottom: 4px;
+}
+
+#group-view #requests .requester {
+  width: 470px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+#group-view #requests .record-actions a {
+  font-weight: bold;
+}
+
+#group-view #note {
+  height: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+#group-view #note img {
+  float: left;
+  margin-right: 10px;
+}
+
+#group-view #note div {
+  font-size: 11px;
+  color: #6c492a;
+  width: 550px;
+  overflow: hidden;
+}
+
+#group-view #posts {
+  border-top: 1px solid #cccccc;
+  margin-top: 15px;
+}
+
+#group-view .post {
+  font-size: 11px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #cccccc;
+}
+
+#group-view .post.odd {
+  background-color: #eeeeee;
+}
+
+#group-view .post-title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#group-view .post-links {
+  font-weight: normal;
+  font-size: 11px;
+  margin-left: 7px;
+}
+
+#group-view .pager,
+#group-view #no-results {
+  margin-top: 15px;
+}
+
+#group-view #main-right img {
+  display: block;
+  margin: -10px 0px 5px;
+}
+
+#group-view #main-right .record-actions {
+  font-size: 11px;
+  text-align: right;
+  height: 100%;
+  overflow: hidden;
+}
+
+#group-view .record-actions div {
+  display: none;
+}
+
+#group-view #main-right td {
+  width: 70px;
+  font-size: 11px;
+  font-weight: bold;
+  vertical-align: top;
+  padding-bottom: 7px;
+  line-height: 15px;
+}
+
+#group-view .record-summary-value {
+  width: 150px;
+  font-weight: normal;
+  overflow: hidden;
+}
+
+#group-view #network-summary td {
+  text-align: right;
+  width: 100%;
+  color: #898989;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+#group-view .user-name {
+  float: left;
+  text-align: left;
+  width: 180px;
+  overflow: hidden;
+  white-space: normal;
+}
+
+#group-view .total {
+  margin: 20px 0px;
+  border-bottom: 2px solid #dedede;
+  text-align: center;
+  line-height: 0px;
+}
+
+#group-view .total span {
+  background-color: white;
+  padding: 0px 10px;
+  color: #696969;
+  font-size: 11px;
+}
+
+/******************** Group edit page ********************/
+
+#group-edit .page-title h1 {
+  width: 100%;
+  overflow: hidden;
+}
+
+#group-edit .section {
+  margin: 0px 20px 20px;
+  border: 1px solid #d2d2d2;
+}
+
+#group-edit .section-header {
+  padding: 10px 20px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #d2d2d2;
+  height: 100%;
+  overflow: hidden;
+}
+
+#group-edit .header-info {
+  float: left;
+}
+
+#group-edit .header-title {
+  float: right;
+  font-weight: bold;
+}
+
+#group-edit .section-content {
+  padding: 20px 10px 5px 20px;
+}
+
+#group-edit #details .section-content {
+  padding: 15px 10px 0px 20px;
+}
+
+#group-edit .form-item {
+  margin: 0px 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#group-edit #details .form-item label,
+#group-edit #image .form-item label,
+#group-edit #submission .form-item label {
+  margin-bottom: 5px;
+}
+
+#group-edit #audience .form-item label {
+  float: left;
+  width: 110px;
+}
+
+#group-edit #details .form-text,
+#group-edit #details .form-textarea {
+  width: 500px;
+}
+
+#group-edit #details .form-radios .form-item {
+  margin-bottom: 5px;
+}
+
+#group-edit .imagefield-edit-image-detail input {
+  width: 13px;
+  height: 13px;
+  margin: 2px 5px 0px 0px;
+  float: left;
+}
+
+#group-edit #field-group-image-attach-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+#group-edit #field-group-image-attach-wrapper div.error {
+  color: #c52020;
+  border: 1px solid #dd7777;
+  background-color: #ffcccc;
+  margin: 0px 0px 20px 0px;
+}
+
+#group-edit #image-container {
+  float: left;
+}
+
+#group-edit .imagefield-edit-image-row {
+  float: left;
+  border: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  width: 250px;
+}
+
+#group-edit .imagefield-edit-image-row img {
+  border: none;
+}
+
+#group-edit .imagefield-edit-image-row * {
+  float: none;
+  margin: 0;
+}
+
+#group-edit .imagefield-edit-image-detail {
+  margin-top: 10px;
+}
+
+#group-edit #field-group-image-attach-hide .form-item {
+  float: none;
+}
+
+#group-edit #field-group-image-attach-button {
+  margin: 0;
+  font-weight: normal;
+  width: 80px;
+}
+
+#group-edit #actions {
+  height: 100%;
+  overflow: hidden;
+  padding: 0px 0px 25px 20px;
+}
+  
+#group-edit #actions .form-submit {
+  float: left;
+  width: 130px;
+}
+
+#group-edit #actions a {
+  float: left;
+  margin: 7px 0px 0px 10px;
+}
+
+/******************** Post view page ********************/
+
+#post-view .desc-container img {
+  margin-left: 5px;
+}
+
+#post-view #posts {
+  padding: 0px 20px 5px;
+}
+
+#post-view .post {
+  border: 2px solid #c0c0c0;
+  margin-bottom: 15px;
+  padding: 7px 10px 10px;
+}
+
+#post-view #post-first {
+  border-color: #888888;
+}
+
+#post-view .post-container {
+  background-color: #eeeeee;
+  height: 100%;
+  overflow: hidden;
+}
+
+#post-view .post-left {
+  float: left;
+  width: 105px;
+  font-size: 11px;
+  color: #666666;
+  background-color: white;
+  border-right: 10px solid white;
+  overflow: hidden;
+}
+
+#post-view .post-left img {
+  display: block;
+  margin: 10px 0px;
+}
+
+#post-view .admin-name {
+  color: black;
+  margin-bottom: 10px;
+}
+
+#post-view .admin-type {
+  font-weight: bold;
+}
+
+#post-view .location {
+  margin-top: 5px;
+  line-height: 15px;
+}
+
+#post-view .post-right {
+  border-left: 115px solid white;
+}
+
+#post-view .post-top {
+  background-color: white;
+  text-align: right;
+  padding-bottom: 5px;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+#post-view .record-actions span {
+  display: none;
+}
+
+#post-view .post-date {
+  float: left;
+}
+
+#post-view .post-top a {
+  margin-left: 7px;
+}
+
+#post-view .post-title {
+  font-weight: bold;
+  padding: 7px 15px 5px;
+  overflow: hidden;
+}
+
+#post-view .post-body {
+  padding: 0px 15px 5px;
+  overflow: hidden;
+}
+
+#post-view .pager,
+#post-view #no-results {
+  margin-bottom: 15px;
+}
+
+/******************** Post edit page ********************/
+
+#post-edit #edit-container {
+  padding: 0px 20px 20px;
+}
+
+#post-edit #reply-label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#post-edit .post {
+  border: 2px solid #c0c0c0;
+  margin-bottom: 15px;
+  padding: 7px 10px 10px;
+}
+
+#post-edit .post-container {
+  background-color: #eeeeee;
+  height: 100%;
+  overflow: hidden;
+}
+
+#post-edit .post-left {
+  float: left;
+  width: 105px;
+  font-size: 11px;
+  color: #666666;
+  background-color: white;
+  border-right: 10px solid white;
+  overflow: hidden;
+}
+
+#post-edit .post-left img {
+  display: block;
+  margin: 10px 0px;
+}
+
+#post-edit .admin-name {
+  color: black;
+  margin-bottom: 10px;
+}
+
+#post-edit .admin-type {
+  font-weight: bold;
+}
+
+#post-edit .location {
+  margin-top: 5px;
+  line-height: 15px;
+}
+
+#post-edit .post-right {
+  border-left: 115px solid white;
+}
+
+#post-edit .post-top {
+  background-color: white;
+  text-align: right;
+  padding-bottom: 5px;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+#post-edit .post-date {
+  float: left;
+}
+
+#post-edit .post-title {
+  font-weight: bold;
+  padding: 7px 15px 5px;
+  overflow: hidden;
+}
+
+#post-edit .post-body {
+  padding: 0px 15px 5px;
+  overflow: hidden;
+}
+
+#post-edit .form-item label {
+  margin-bottom: 5px;
+}
+
+#post-edit .form-text,
+#post-edit .form-textarea {
+  width: 600px;
+}
+
+#post-edit .form-textarea {
+  height: 250px;
+}
+
+#post-edit #actions {
+  height: 100%;
+  overflow: hidden;
+}
+  
+#post-edit #actions .form-submit {
+  float: left;
+  width: 80px;
+}
+
+#post-edit #actions a {
+  float: left;
+  margin: 7px 0px 0px 10px;
+}
+
+/******************** Site search page ********************/
+
+#site-search {
+  padding: 0px 20px 5px;
+}
+
+#site-search form {
+  margin: 0px 0px 15px 0px;
+}
+
+#site-search .form-select {
+  margin: 0;
+}
+
+#site-search ul {
+  list-style: disc;
+  padding-left: 20px;
+  line-height: 23px;
+  margin-top: 5px;
+}
+
+#site-search .search-result {
+  margin-bottom: 25px;
+}
+
+#site-search .search-header {
+  font-size: 14px;
+  font-weight: bold;
+  color: gray;
+}
+
+#site-search .search-excerpt {
+  margin: 7px 0px 10px 20px;
+}
+
+#site-search .search-footer {
+  margin-left: 20px;
+  font-size: 11px;
+  background-color: #e9e9e9;
+  padding: 5px 10px;
+}
+
+#site-search .search-footer a {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+#site-search .pager,
+#site-search #no-results {
+  margin-bottom: 15px;
+}
+
+/******************** User home page ********************/
+
+#user-home {
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-home #title-extra {
+  float: right;
+  margin-top: 2px;
+}
+
+#user-home #home-left {
+  float: left;
+  padding: 5px 0px 20px 20px;
+  width: 650px;
+  overflow: hidden;
+}
+
+#user-home #home-left h1 {
+  margin: 0px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#user-home .home-table {
+  border-top: 1px solid #dedede;
+  width: 100%;
+  margin: 20px 0px 30px 0px;
+}
+
+#user-home .even {
+  background-color: White;
+}
+
+#user-home .home-table td {
+  padding: 5px 15px;
+  border-bottom: 1px solid #dedede;
+}
+
+#user-home .name {
+  width: 150px;
+  overflow: hidden;
+}
+
+#user-home .subject {
+  width: 260px;
+  overflow: hidden;
+}
+
+#user-home .activity {
+  width: 440px;
+  overflow: hidden;
+}
+
+#user-home #requests-all {
+  text-align: right;
+  overflow: hidden;
+  margin-bottom: -15px;
+  
+}
+
+#user-home #requests-all a {
+  font-size: 11px;
+  margin-left: 10px;
+}
+
+#user-home #requests {
+  border: 2px solid #f8c5af;
+  margin-top: 20px;
+  padding: 7px 10px 5px;
+}
+
+#user-home #requests td {
+  padding-bottom: 4px;
+}
+
+#user-home #requests .requester {
+  width: 510px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+#user-home .record-actions div {
+  display: none;
+}
+
+#user-home #requests .record-actions a {
+  font-weight: bold;
+}
+
+#user-home #no-activity {
+  margin: 20px 0px 30px 0px;
+}
+
+#user-home #accordion {
+  margin-top: 20px;
+  display: none;
+}
+
+#user-home .accordion-header {
+  background: url(images/tab.png) 50%;
+  border: 1px solid #d3d3d3;
+  padding: 5px 10px 5px 5px;
+  margin-top: 2px;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  height: 100%;
+  overflow: auto;
+  font-size: 11px;
+}
+
+#user-home #accordion .selected {
+  border: 1px solid #aaaaaa;
+  border-bottom: none;
+  background: white;
+}
+
+#user-home .accordion-container {
+  border: 1px solid #aaaaaa;
+  border-top: none;
+}
+
+#user-home .accordion-content {
+  padding: 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-home .accordion-icon {
+  background: url(images/arrow-right.gif) 50% no-repeat;
+  height: 17px;
+  width: 17px;
+  float: left;
+}
+
+#user-home #accordion .selected .accordion-icon {
+  background-image: url(images/arrow-down.gif);
+}
+
+#user-home .accordion-title {
+  float: left;
+}
+
+#user-home .accordion-latest {
+  float: right;
+  font-style: italic;
+  overflow: hidden;
+}
+
+#user-home .accordion-footer {
+  clear: both;
+  text-align: right;
+  font-size: 11px;
+  font-weight: bold;
+  color: #535a7a;
+  padding: 10px 15px;
+}
+
+#user-home .latest-member {
+  float: left;
+  width: 105px;
+  font-size: 11px;
+  color: #666666;
+  overflow: hidden;
+  margin: 10px 15px 0px 0px;
+}
+
+#user-home .latest-member img {
+  display: block;
+  margin: 10px 0px;
+}
+
+#user-home .location {
+  margin-top: 5px;
+  line-height: 15px;
+}
+
+#user-home #latest-deals,
+#user-home #latest-groups,
+#user-home #latest-topics {
+  margin-top: 10px;
+}
+
+#user-home .accordion-content li {
+  line-height: 20px;
+  padding-bottom: 7px;
+}
+
+#user-home .accordion-content a {
+  zoom: 0 !important;
+}
+
+#user-home #home-bottom {
+  margin-top: 20px;
+  text-align: right;
+}
+
+#user-home #home-bottom img {
+  vertical-align: middle;
+  margin-right: 7px;
+}
+
+#user-home img#twitter {
+  height: 30px;
+  width: 30px;
+  margin: 0px 0px 0px 15px;
+}
+
+#user-home #home-right {
+  float: right;
+  padding: 5px 20px 50px 0px;
+  font-size: 11px;
+  width: 195px;
+}
+
+#user-home #growth {
+  margin: 0px 0px 5px 2px;
+}
+
+#user-home h2 {
+  margin: 0;
+  background-color: #d7dcf1;
+  padding: 5px 10px;
+  font-size: 11px;
+  border-bottom: 1px solid #b3bbdd;
+}
+
+#user-home .right-section {
+  background-color: #f1f3fc;
+  padding: 10px 10px 0px;
+  margin-bottom: 20px;
+  color: #6a7298;
+}
+
+#user-home .right-group {
+  padding-bottom: 10px;
+}
+
+#user-home #send-pm {
+  text-align: center;
+}
+
+#user-home .twtr-hd {
+  background-color: #d7dcf1;
+  padding: 7px 10px;
+  border-bottom: 1px solid #b3bbdd;
+}
+
+#user-home .twtr-hd h3 {
+  background-color: #d7dcf1 !important;
+  color: black !important;
+  font-family: Verdana;
+  font-weight: bold !important;
+}
+
+#user-home .twtr-bd {
+  padding: 0px;
+  font-family: Verdana;
+  font-size: 11px;
+}
+
+#user-home #twtr-widget-1 .twtr-timeline,
+#user-home #twtr-widget-1 .twtr-timeline * {
+  background-color: #f1f3fc !important;
+  -moz-border-radius: 0px;
+}
+
+#user-home .twtr-tweet {
+  border-bottom: 1px solid #d7dcf1;
+}
+
+#user-home .twtr-ft {
+  display: none;
+}
+
+/******************** Error page ********************/
+
+#user-error {
+  padding: 5px 20px 10px;
+}
+
+#user-error h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#user-error p {
+  margin: 3px 0px 20px 20px;
+}
+
+/******************** Site home page ********************/
+
+#site-home {
+  margin: 10px 120px 50px;
+  text-align: center;
+  font-size: 11px;
+}
+
+#site-home h1 {
+  font-size: 12px;
+  margin: 0px 0px 7px;
+}
+
+#site-home #desc-bar {
+  margin: 35px 0px 25px;
+}
+
+#site-home img {
+  vertical-align: middle;
+}
+
+#site-home #desc-bar span {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial;
+  padding-left: 5px;
+}
+
+#site-home #people {
+  color: #c82626;
+  padding-right: 35px;
+}
+
+#site-home #deals {
+  color: #436c3f;
+  padding-right: 35px;
+}
+
+#site-home #opportunities {
+  color: #333372;
+}
+
+#site-home #map {
+  border: 2px solid #c4c4c4;
+  padding: 15px 30px;
+}
+
+#site-home object {
+  width: 550px;
+  height: 300px;
+}
+
+#site-home #map-bottom {
+  height: 100%;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+#site-home #map-desc {
+  float: left;
+  text-align: left;
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+#site-home #twitter {
+  float: right;
+}
+
+/******************** User registration page ********************/
+
+#user-register .section {
+  margin: 0px 20px 20px;
+  border: 1px solid #d2d2d2;
+}
+
+#user-register .section-header {
+  padding: 10px 20px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #d2d2d2;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-register .header-info {
+  float: left;
+}
+
+#user-register .header-title {
+  float: right;
+  font-weight: bold;
+}
+
+#user-register .section-content {
+  padding: 20px 10px 5px 20px;
+}
+
+#user-register #personal .form-item,
+#user-register #investor .form-item,
+#user-register #geo-area {
+  margin: 0px 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-register #personal .form-item label,
+#user-register #investor .form-item label {
+  float: left;
+}
+
+#user-register #personal .form-item label {
+  width: 150px;
+}
+
+#user-register #investor .form-item label {
+  width: 180px;
+}
+
+#user-register #investor .form-checkboxes {
+  float: left;
+  width: 600px;
+  margin: 0;
+}
+
+#user-register #investor .form-checkboxes .form-item {
+  float: left;
+  margin: 0px 0px 5px 0px;
+  width: 180px;
+}
+
+#user-register #investor .form-checkboxes label.option {
+  width: auto;
+  padding: 0;
+}
+
+#user-register #investor .form-checkboxes input {
+  width: 13px;
+  height: 13px;
+  margin: 2px 5px 0px 0px;
+  float: left;
+}
+
+#user-register #geo-area .form-item {
+  float: left;
+  margin: 0px 15px 0px 0px;
+}
+
+#user-register #investor .form-item .description {
+  margin: 0px 0px 0px 10px;
+  padding: 0;
+  background: none;
+  border: none;
+  float: left;
+  width: 200px;
+}
+
+#user-register .form-text, 
+#user-register .form-select {
+  width: auto;
+  float: left;
+}
+
+#user-register #edit-pass-wrapper {
+  margin: 0;
+}
+
+#user-register ul {
+  list-style: square;
+  padding-left: 20px;
+  margin: 5px 0px 20px 0px;
+  font-size: 11px;
+  line-height: 20px;
+}
+
+#user-register #qualify label {
+  font-size: 14px;
+  font-style: italic;
+  font-family: Arial;
+}
+
+#user-register #qualify .form-radios label {
+  font-size: 12px;
+  font-style: normal;
+  font-family: Verdana;
+}
+
+#user-register .form-submit {
+  width: 130px;
+  margin: 0px 20px 20px;
+}
+
+/******************** User login page ********************/
+
+#user-login #login-main {
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 20px 20px;
+}
+
+#user-login #advantage {
+  float: left;
+  width: 450px;
+  line-height: 20px;
+}
+
+#user-login h1 {
+  margin: 0px 0px 10px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#user-login ul {
+  list-style: square;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+#user-login #login-container {
+  float: right;
+  width: 375px;
+  border: 1px solid #dedede;
+}
+
+#user-login #cont-title {
+  background-color: #dedede;
+  padding: 5px 0px 5px 90px;
+  height: 22px;
+  line-height: 20px;
+  font-size: 17px;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+#user-login img {
+  margin: -40px 0px 0px 20px;
+  position: relative;
+  display: block;
+}
+
+#user-login #cont-content {
+  padding: 25px 15px 20px;
+}
+
+#user-login .form-item {
+  margin: 0px 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#user-login .form-item label {
+  float: left;
+  width: 90px;
+  text-align: right;
+}
+
+#user-login .form-text {
+  margin-left: 10px;
+  width: 230px;
+}
+
+#user-login label.option {
+  width: auto;
+}
+
+#user-login .form-checkbox {
+  width: 13px;
+  height: 13px;
+  margin: 3px 5px 0px 100px;
+  float: left;
+}
+
+#user-login #actions {
+  height: 100%;
+  overflow: hidden;
+}
+  
+#user-login #actions .form-submit {
+  float: left;
+  width: 80px;
+  margin-left: 100px;
+}
+
+#user-login #actions a {
+  float: right;
+  font-size: 11px;
+  margin: 7px 10px 0px 0px;
+}
+
+#user-login #not-user {
+  clear: both;
+  text-align: center;
+  font-size: 11px;
+  color: #8a8d9e;
+  margin: 20px 90px;
+  padding: 10px;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+
+/******************** Password assistance/reset page ********************/
+
+#user-pass {
+  padding: 10px 20px 20px;
+}
+
+#user-pass h1 {
+  margin: 0px 0px 15px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#user-pass .form-item {
+  height: 100%;
+  overflow: hidden;
+  margin: 20px 0px;
+}
+
+#user-pass .form-item label {
+  float: left;
+  width: 70px;
+}
+
+#user-pass .form-item input {
+  float: left;
+}
+
+#user-pass #actions {
+  height: 100%;
+  overflow: hidden;
+}
+  
+#user-pass #actions .form-submit {
+  float: left;
+  width: 140px;
+}
+
+#user-pass #actions a {
+  float: left;
+  margin: 7px 0px 0px 10px;
+}
+
+#user-pass-reset .form-item {
+  margin: 10px 0px;
+}
+
+#user-pass-reset .form-item label {
+  width: 150px;
+}
+
+/******************** Contact page ********************/
+
+#site-contact {
+  padding: 10px 20px 20px;
+}
+
+#site-contact h1 {
+  margin: 0px 0px 15px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#site-contact .form-item label {
+  margin-bottom: 5px;
+}
+
+#site-contact .form-text,
+#site-contact .form-textarea {
+  width: 400px;
+}
+
+#site-contact .form-submit {
+  width: 130px;
+}
+
+/******************** Maintenance page ********************/
+
+#site-maint {
+  padding: 10px 40px 30px 40px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#site-maint #offline {
+  float: left;
+  width: 78px;
+  height: 97px;
+  background: url(images/maint.png);
+  font-weight: bold;
+  padding: 60px 40px 0px 40px;
+  text-align: center;
+}
+
+#site-maint #offline-msg {
+  margin: 40px 0px 0px 180px;
+}
+
+#site-maint h1 {
+  margin: 0px 0px 15px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+/******************** Legal page ********************/
+
+#site-legal {
+  padding: 10px 20px 20px;
+  font-size: 11px;
+}
+
+#site-legal h1 {
+  margin: 0px 0px 15px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#site-legal h2 {
+  font-size: 11px;
+  margin: 0px 0px 4px;
+}
+
+#site-legal p,
+#site-legal ol {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
+
+#site-legal ul {
+  list-style: disc;
+  padding: 0px 0px 15px 40px;
+}
+
+#site-legal ol {
+  list-style-type: lower-alpha;
+}
+
+#site-legal ol.roman {
+  list-style-type: lower-roman;
+}
+
+/******************** About us page ********************/
+
+#site-about {
+  padding: 10px 20px 20px;
+}
+
+#site-about h1 {
+  margin: 0px 0px 15px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#site-about h2 {
+  font-size: 12px;
+  margin: 0px 0px 10px;
+}
+
+#site-about p {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
+
+#site-about ul {
+  list-style: disc;
+  padding: 0px 0px 15px 40px;
+}
+
+/******************** Deals page ********************/
+
+#user-deals #deal-main {
+  padding: 20px;
+}
+
+#user-deals #groups {
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #58588b;
+  font-size: 13px;
+}
+
+#user-deals #groups select {
+  font-size: 11px;
+  margin-left: 5px;
+  max-width: 530px;
+}
+
+#user-deals #groups a {
+  font-size: 11px;
+  margin-left: 10px;
+}
+
+#user-deals #edit-filter1 {
+  width: 245px;
+}
+
+#user-deals #edit-filter4,
+#user-deals #edit-filter7 {
+  width: 250px;
+}
+
+#user-deals #edit-op2,
+#user-deals #edit-filter5,
+#user-deals #edit-filter8 {
+  width: 180px;
+}
+
+#user-deals #edit-filter2 {
+  width: 95px;
+}
+
+#user-deals #edit-filter9 {
+  width: 100px;
+}
+
+#user-deals #edit-filter3,
+#user-deals #edit-filter10 {
+  width: 160px;
+}
+
+#user-deals #edit-filter6 {
+  width: 275px;
+}
+
+#user-deals #edit-filter11-wrapper {
+  margin: 15px 0px -5px;
+  overflow: auto;
+  height: 100%
+}
+
+#user-deals .search-adv label.option {
+  margin: 0px;
+}
+
+#user-deals #edit-filter11 {
+  vertical-align: middle;
+  margin: 0px 3px 1px 0px;
+  padding: 0px;
+}
+
+#user-deals #deals {
+  border-top: 1px solid #cccccc;
+  margin-top: 15px;
+}
+
+#user-deals .deal {
+  padding: 10px 15px;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+}
+
+#user-deals .deal.odd {
+  background-color: #eeeeee;
+}
+
+#user-deals .deal-top {
+  height: 100%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#user-deals .deal-top div {
+  width: 700px;
+  overflow: hidden;
+  float: left;
+}
+
+#user-deals .deal-top a {
+  font-weight: bold;
+}
+
+#user-deals .deal-details {
+  float: right;
+  font-size: 11px;
+  line-height: 14px;
+  font-family: Arial;
+}
+
+#user-deals .deal-summary {
+  font-size: 11px;
+  height: 100%;
+  overflow: hidden;
+  margin: 10px 0px 15px;
+}
+
+#user-deals .deal-summary table {
+  float: left;
+}
+
+#user-deals .summary-title {
+  vertical-align: top;
+  font-weight: bold;
+}
+
+#user-deals .summary-value {
+  width: 200px;
+  margin: 0px 5px;
+  overflow: hidden;
+}
+
+#user-deals .section-1 .summary-value {
+  width: 120px;
+}
+
+#user-deals .deal-posted {
+  font-size: 10px;
+  color: #666666;
+}
+
+#user-deals .deal-posted div {
+  display: none;
+}
+
+#user-deals .pager,
+#user-deals #no-results {
+  margin: 15px 5px 0px 0px;
+}
+
+/******************** Deal edit page ********************/
+
+#deal-edit .page-title h1 {
+  width: 100%;
+  overflow: hidden;
+}
+
+#deal-edit .deal-posted {
+  display: inline;
+}
+
+#deal-edit .deal-posted div {
+  display: none;
+}
+
+#deal-edit .section {
+  margin: 0px 20px 20px;
+  border: 1px solid #d2d2d2;
+}
+
+#deal-edit .section-header {
+  padding: 10px 20px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #d2d2d2;
+  height: 100%;
+  overflow: hidden;
+}
+
+#deal-edit .header-info {
+  float: left;
+}
+
+#deal-edit .header-title {
+  float: right;
+  font-weight: bold;
+}
+
+#deal-edit .section-content {
+  padding: 20px 10px 5px 20px;
+}
+
+#deal-edit #submission {
+  border: 2px solid #f8c5af;
+}
+
+#deal-edit #submission .section-header {
+  border-bottom: 1px solid #f8c5af;
+  background-color: #fdf5f2;
+}
+
+#deal-edit #submission .section-content {
+  padding: 10px 20px;
+  color: #6c492a;
+}
+
+#deal-edit .form-item {
+  margin: 0px 0px 15px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#deal-edit #company .form-item label,
+#deal-edit #operations .form-item label,
+#deal-edit #financing .form-item label {
+  float: left;
+  width: 135px;
+}
+
+#deal-edit #summary .form-item label,
+#deal-edit #attachments .form-item label {
+  margin-bottom: 5px;
+}
+
+#deal-edit .number {
+  float: left;
+  margin-right: 10px;
+}
+
+#deal-edit .form-radios {
+  float: left;
+  width: 600px;
+  margin: 0;
+}
+
+#deal-edit .form-radios .form-item {
+  float: left;
+  margin: 0px 0px 5px 0px;
+  width: 180px;
+}
+
+#deal-edit .form-radios label.option {
+  width: auto;
+  padding: 0;
+}
+
+#deal-edit .form-radios input {
+  width: 13px;
+  height: 13px;
+  margin: 2px 5px 0px 0px;
+  float: left;
+}
+
+#deal-edit #field-deal-attachments-attach-wrapper div.error {
+  margin: 0px 0px 20px 0px;
+}
+
+#deal-edit #field-deal-attachments-attach-wrapper .form-submit {
+  font-weight: normal;
+  width: 80px;
+}
+
+#deal-edit .attachment-list {
+  margin-bottom: 20px;
+}
+
+#deal-edit .attachment-list tr {
+  border: 0px;
+}
+
+#deal-edit .attachment-list td {
+  border-bottom: 1px solid #ccc;
+  padding: 5px 0px 4px;
+}
+
+#deal-edit .attachment-list .form-item {
+  margin: 0px;
+  padding-right: 20px;
+}
+
+#deal-edit .filefield-edit-file-url {
+  padding: 5px 20px 0px;
+}
+
+#deal-edit #actions {
+  height: 100%;
+  overflow: hidden;
+  padding: 0px 0px 25px 20px;
+}
+  
+#deal-edit #actions .form-submit {
+  float: left;
+  width: 130px;
+  margin-right: 10px;
+}
+
+#deal-edit #actions a {
+  float: left;
+  margin-top: 7px;
+}
+
+/******************** Deal view page ********************/
+
+#deal-view #main-left {
+  width: 500px;
+  float: left;
+  border-right: 3px solid #dedede;
+  margin-right: -3px;
+  overflow: hidden;
+}
+
+#deal-view #main-left .page-title {
+  height: 100%;
+  overflow: hidden;
+}
+
+#deal-view #main-left .page-title div {
+  font-size: 14px;
+  padding-top: 3px;
+  clear: left;
+}
+
+#deal-view #main-right {
+  width: 397px;
+  float: left;
+  border-left: 3px solid #dedede;
+}
+
+#deal-view #main-right .page-title {
+  padding: 5px 10px;
+  height: 17px;
+}
+
+#deal-view #main-right .page-title h1 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+#deal-view #main-left .section {
+  margin: 0px 20px 20px;
+  overflow: hidden;
+}
+
+#deal-view #main-left .section h2 {
+  font-size: 12px;
+  text-decoration: underline;
+  margin: 15px 0px 0px 0px;
+}
+
+#deal-view #main-left .section h1 {
+  margin: 30px 0px 20px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#deal-view #headline {
+  border: 1px solid #dedede;
+  background-color: #f6f6f6;
+  margin: 0px 12px 12px;
+  padding: 5px 10px;
+  overflow: hidden;
+}
+
+#deal-view #main-right .section {
+  margin: 10px 12px 15px;
+}
+
+#deal-view #main-right td {
+  font-weight: bold;
+  vertical-align: top;
+  padding: 3px 10px 3px 0px;
+}
+
+#deal-view #main-right .summary-value {
+  font-weight: normal;
+  width: 230px;
+  overflow: hidden;
+}
+
+#deal-view #deal-action {
+  border: 2px solid #f8c5af;
+  margin-top: 30px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#deal-view #deal-action span {
+  font-weight: normal;
+  font-size: 11px;
+  color: #666666;
+}
+
+#deal-view .deal-posted {
+  font-size: 10px;
+  margin: 20px 0px;
+  color: #666666;
+  overflow: hidden;
+}
+
+#deal-view .deal-posted div {
+  display: none;
+}
+
+/******************** Blogs page ********************/
+
+#site-blogs {
+  padding: 10px 20px 30px;
+  overflow: auto;
+  height: 100%;
+}
+
+#site-blogs h1 {
+  margin: 0px 0px 20px;
+  font-size: 25px;
+  font-weight: normal;
+  color: #8a8d9e;
+}
+
+#site-blogs h2 {
+  font-size: 12px;
+  margin: 15px 0px 10px;
+}
+
+#site-blogs #blogs-left {
+  float: left;
+  margin-right: 10px;
+}
+
+#site-blogs #blogs-right {
+  float: left;
+}
+
+#site-blogs ul {
+  list-style: disc;
+  width: 400px;
+  padding: 0px 0px 0px 25px;
+}

@@ -1,0 +1,731 @@
+<?php
+// $Id$
+
+require_once 'venture_deal.inc';
+require_once 'venture_geo.inc';
+require_once 'venture_group.inc';
+require_once 'venture_invite.inc';
+require_once 'venture_network.inc';
+require_once 'venture_pm.inc';
+require_once 'venture_profile.inc';
+require_once 'venture_user.inc';
+
+/******** HOOK IMPLEMENTATIONS ********/
+
+/**
+* Implementation of hook_cron().
+*/
+function venture_cron() {
+  // Remove temporary files over a day old.
+  // NOTE: Temp folder is cleaned in D6.
+  $boundary = time() - 60*60*24;
+  $files = file_scan_directory(file_directory_temp(), '.*');
+  
+  foreach(array_keys($files) as $file) {
+    if (filemtime($file) < $boundary) {
+      file_delete($file);
+    }
+  }
+  
+  // Geocode processing
+  venture_geo_process();
+}
+
+/**
+* Implementation of hook_db_rewrite_sql().
+*/
+function venture_db_rewrite_sql($query, $primary_table, $primary_field, $args) {
+  if ($primary_table == 'activity_targets') {
+    return venture_user_get_activities_rewrite_sql();
+  }
+}
+
+/**
+* Implementation of hook_filefield().
+*/
+function venture_filefield($op, $node = NULL, $field = NULL, $file = NULL) {
+  if (is_array($op)) {
+    // Workaround for a bug in Filefield implementation,
+    // where theme and hook function names conflict
+    return theme_filefield($op);
+  }
+  
+  if ($op == 'file_validate') {
+    // Display a message if the filesize exceeds maximum (30MB)
+    if ($file['filesize'] > 30 * 1024 * 1024) {
+      form_set_error($file['source'], 'The file you uploaded has a filesize greater than the maximum allowed.');
+      return FALSE;
+    }
+  }
+  else if ($op == 'file_delete') {
+    // If deleting the last file for the node, remove the node directory
+    if ($file['fid'] != 'upload' && $file['filepath']) {
+      $dir = dirname($file['filepath']);
+      $files = array_diff(scandir($dir), array('.', '..'));
+      if (count($files) == 1) {
+        file_delete($file['filepath']);
+        rmdir($dir);
+      }
+    }
+  }
+}
+
+/**
+* Implementation of hook_form_alter().
+*/
+function venture_form_alter($form_id, &$form) {
+  // Remove preview button from all forms
+  unset($form['preview']);
+  
+  switch ($form_id) {
+    case 'comment_form':
+      if (arg(0) == 'post') {
+        venture_group_comment_alter($form);
+      }
+      break;
+      
+    case 'contact_mail_page':
+      venture_contact_alter($form);
+      break;
+      
+    case 'deal_node_form':
+      venture_deal_alter($form);
+      break;
+      
+    case 'filefield_js':
+      if ($form['type']['#value'] == 'deal') {
+        venture_deal_attachments_alter($form);
+      }
+      break;
+      
+    case 'group_node_form':
+      venture_group_alter($form);
+      break;
+      
+    case 'group_post_node_form':
+      venture_group_post_alter($form);
+      break;
+    
+    case 'imagefield_js':
+      if ($form['type']['#value'] == 'profile') {
+        venture_profile_photo_alter($form);
+      }
+      else if ($form['type']['#value'] == 'group') {
+        venture_group_image_alter($form);
+      }
+      break;
+      
+    case 'invite_form':
+      venture_invite_alter($form);
+      break;
+      
+    case 'privatemsg_cur_folder_form':
+      venture_pm_cur_folder_alter($form);
+      break;
+      
+    case 'privatemsg_list_form':
+      venture_pm_list_alter($form);
+      break;
+      
+    case 'privatemsg_new_form':
+      venture_pm_new_alter($form);
+      break;
+      
+    case 'privatemsg_view_form':
+      venture_pm_view_alter($form);
+      break;
+    
+    case 'profile_node_form':
+      venture_profile_account_alter($form);
+      break;
+      
+    case 'search_form':
+      venture_search_alter($form);
+      break;
+      
+    case 'user_login':  
+    case 'user_login_block':
+      venture_user_login_alter($form);
+      break;
+    
+    case 'user_pass':
+      venture_user_pass_alter($form);
+      break;
+      
+    case 'user_pass_reset':
+      venture_user_pass_reset_alter($form);
+      break;
+      
+    case 'user_register':
+      venture_profile_register_alter($form);
+      break;
+      
+    case 'views_filters':
+      if ($form['#view_name'] == 'deals') {
+        venture_deal_views_filters_alter($form);
+      }
+      break;
+  }   
+}
+
+/**
+* Implementation of hook_imagefield_file().
+*/
+function venture_imagefield_file($op, $file) {
+  if (strpos($file['filepath'], 'profiles') !== FALSE) {
+    venture_profile_imagefield($op, $file);
+  }
+  else if (strpos($file['filepath'], 'groups') !== FALSE) {
+    venture_group_imagefield($op, $file);
+  }
+}
+
+/**
+* Implementation of hook_init().
+*/
+function venture_init() {
+  venture_pm_check_messages();
+}
+
+/**
+* Implementation of hook_invite().
+*/
+function venture_invite($op, $args) {
+  if ($op == 'escalate') {
+    venture_network_connect_with_inviter($args);
+  }
+}
+
+/**
+* Implementation of hook_mail_alter(). 
+*/
+function venture_mail_alter(&$mailkey, &$to, &$subject, &$body, &$from, &$headers) {
+  global $base_url;
+  
+  // Use friendly name for the sender
+  if ($from) {
+    $account = user_load(array('name' => $from));
+    if ($account) {
+      if (venture_profile_is_admin($account)) {
+        $sender = 'VentureTap.com';
+      }
+      else {
+        $sender = venture_profile_get_name($account->uid, FALSE);
+      }
+    }
+  }
+  else {
+    $from = $headers['From'];
+  }
+  if ($from == $headers['Sender']) {
+    $sender = 'VentureTap.com';
+  }
+  $headers['From'] = $sender ? "\"$sender\" <$from>" : $from;
+  
+  if ($mailkey == 'user-register-welcome') {
+    // Modify welcome email
+    venture_profile_welcome_mail_alter($from, $subject, $body);
+  }
+  else if ($mailkey == 'og_new_admin') {
+    // Cancel new admin email (called on group creation)
+    $to = 'devnull@venturetap.com';
+  }
+  
+  // Add a standard footer to the body
+  $body .= "\n\n-----\nTap into the venture community with VentureTap\n$base_url";
+}
+
+/**
+* If a file size exceeds the PHP POST maximum, display
+* a friendly error message instead of Filefield's ugly failure
+*/
+function venture_filefield_js() {
+  if (!$_POST) {
+    print 'File size exceeded the maximum limit. Refresh this page to continue uploading.';
+    exit();
+  }
+  filefield_js();
+}
+
+/**
+* Implementation of hook_menu(). 
+*/
+function venture_menu($may_cache) {
+  $items = array();
+  if ($may_cache) {
+    $items[] = array(
+      'path' => 'about',
+      'callback' => 'theme',
+      'callback arguments' => array('about'),
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'advsearch',
+      'callback' => 'theme',
+      'callback arguments' => array('search_view'),
+      'access' => user_access('search content'),
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'blogs',
+      'callback' => 'theme',
+      'callback arguments' => array('blogs'),
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'contact', // Override existing menu item
+      'title' => 'Contact us',
+      'callback' => 'theme',
+      'callback arguments' => array('contact'),
+      'access' => user_access('access site-wide contact form'),
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'error',
+      'callback' => 'theme',
+      'callback arguments' => array('error'),
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'filefield/js', // Override existing menu item
+      'callback' => 'venture_filefield_js',
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'home',
+      'callback' => 'theme',
+      'callback arguments' => array('home'),
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+    $items[] = array(
+      'path' => 'legal',
+      'callback' => 'theme',
+      'callback arguments' => array('legal'),
+      'access' => TRUE,
+      'type' => MENU_CALLBACK
+    );
+  }
+  
+  // Add miscellaneous items
+  $items = array_merge($items, venture_deal_menu($may_cache));
+  $items = array_merge($items, venture_group_menu($may_cache));
+  $items = array_merge($items, venture_invite_menu($may_cache));
+  $items = array_merge($items, venture_network_menu($may_cache));
+  $items = array_merge($items, venture_profile_menu($may_cache));
+  
+  return $items;
+}
+
+/**
+* Implementation of hook_node_access_records(). 
+*/
+function venture_node_access_records($node) {
+  $grants = array();
+  $grants += venture_deal_node_access_records($node);
+  
+  return $grants;
+}
+
+/**
+* Implementation of hook_node_grants(). 
+*/
+function venture_node_grants($account, $op) {
+  $grants = array();
+  $grants += venture_deal_node_grants($account, $op);
+  
+  return $grants;
+}
+
+/**
+* Implementation of hook_nodeapi(). 
+*/
+function venture_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  $searchable = in_array($node->type, array('profile', 'group', 'deal'));
+  switch ($op) {
+    case 'alter':
+      if ($searchable) {
+        // Do not index field names
+        $node->body = preg_replace('!<remove>.*?</remove>!', '', $node->body);
+      }
+      break;
+
+    case 'insert':
+      // If a Cron job (with Search module enabled) interrupts the CCK node
+      // create process, make sure the data is left in a consistent state
+      cache_clear_all('content:'. $node->nid .':'. $node->vid, 'cache_content');
+      db_query('UPDATE {node} SET changed = %d WHERE nid = %d', time(), $node->nid);
+      break;
+
+    case 'submit':
+      if ($node->type == 'profile') {
+        // For profile content type, automatically set the title (hidden on the form itself)
+        $node->title = venture_profile_get_name($node, FALSE);
+      }
+      break;
+      
+    case 'update':
+      // If a Cron job (with Search module enabled) interrupts the CCK node
+      // update process, make sure the data is left in a consistent state
+      db_query('UPDATE {node} SET changed = %d WHERE nid = %d', time(), $node->nid);
+      break;
+
+    case 'view':
+      if ($searchable) {
+        // This will only be visible within search excerpts
+        if ($node->type == 'profile') {
+          $node->title = venture_profile_get_name($node, FALSE);
+        }
+        $node->content['body']['#value'] = $node->nid;
+        $node->content['#theme'] = 'search_excerpt';
+      }
+      break;
+  }
+}
+
+/**
+* Implementation of hook_og().
+*/
+function venture_og($op, $gid, $uid, $args) {
+  venture_group_hook($op, $gid, $uid, $args);
+}
+
+/**
+* Implementation of hook_privatemsg().
+*/
+function venture_privatemsg($message, $op) {
+  venture_pm_hook($message, $op);
+}
+
+/**
+* Implementation of hook_search_preprocess(). 
+*/
+function venture_search_preprocess($text) {
+  // Break up complex words (with dots, dashes, and underscores) for improved indexing
+  if (preg_match_all('/\w+([._-]+\w+)+/', $text, $matches)) {
+    foreach ($matches[0] as $complex) {
+      $text .= ' ' . preg_replace('/[._-]+/', ' ', $complex);
+    }
+  }
+  return $text;
+}
+
+/**
+* Implementation of hook_token_values().
+*/
+function venture_token_values($type = 'all', $data = NULL) {
+  $values = array();
+  $values += venture_invite_token_values($type, $data);
+  $values += venture_network_token_values($type, $data);
+  $values += venture_group_token_values($type, $data);
+  $values += venture_deal_token_values($type, $data);
+  
+  return $values;
+}
+
+/**
+* Implementation of hook_user().
+*/
+function venture_user($op, &$edit, &$account, $category = NULL) {
+  venture_user_hook($op, $edit, $account, $category);
+}
+
+/**
+* Implementation of hook_views_arguments().
+*/
+function venture_views_arguments() {
+  $args = array(
+    'venture_exclude' => array(
+      'name' => t('Venture: Exclude CCK field values'), 
+      'handler' => 'venture_views_arguments_exclude',
+      'option' => 'string',
+      'help' => t("Set the option to the CCK field name whose value will be excluded.")
+    ),
+    'venture_list' => array(
+      'name' => t('Venture: Accept multiple values for CCK field values'),
+      'handler' => 'venture_views_arguments_list',
+      'option' => 'string',
+      'help' => t("Set the option to the CCK field name whose value will be ORed.")
+    )
+  );
+  $args += venture_group_views_arguments();
+  return $args;
+}
+
+/**
+* Implementation of hook_views_tables_alter().
+*/
+function venture_views_tables_alter(&$table_data) {
+  venture_deal_views_tables_alter($table_data);
+  venture_group_views_tables_alter($table_data);
+}
+
+/******** UTILITY FUNCTIONS ********/
+
+/**
+* Alter the uploaded files form
+*/
+function venture_attachments_alter(&$form, $field_name, $type) {
+  $form[$field_name]['#type'] = 'item';
+  $form[$field_name]['new']["{$field_name}_upload"]['#description'] = "Changes are not permanent until you save this $type.";
+  unset($form[$field_name]['#title']);
+  unset($form[$field_name]['#description']);
+  
+  // Redirect filefield path to private file handler
+  if ($_SESSION['filefield']) {
+    foreach ($_SESSION['filefield'] as &$files) {
+      if (is_array($files)) {
+        foreach($files as &$file) {
+          $file['preview'] = str_replace('sites/default', 'system', $file['preview']);
+        }
+      }
+    }
+  }
+}
+
+/**
+* Alter the contact form
+*/
+function venture_contact_alter(&$form) {
+  global $user;
+  
+  $form['#pre_render'][] = 'venture_contact_pre_render';
+  $form['name']['#default_value'] = $user->uid ? venture_profile_get_name($user->uid) : '';
+  $form['mail']['#title'] = 'Your email';
+  $form['message']['#rows'] = 10;
+  $form['submit']['#value'] = 'Send Message';
+  
+  unset($form['copy']);
+}
+
+/**
+* Contact form pre-render event handler
+*/
+function venture_contact_pre_render($form_id, &$form) {
+  // Fix up the error message wording
+  if ($_SESSION['messages']['error']) {
+    $errors = &$_SESSION['messages']['error'];
+    $errors = str_replace('e-mail', 'email', $errors);
+  }
+}
+
+/**
+* Define constants
+*/
+function venture_define() {
+  $args = func_get_args();
+  foreach($args as $value => $name) {
+    define($name, $value);
+  }
+}
+
+/**
+* Format funding stages element for tooltips
+*/
+function venture_format_funding_stages(&$element) {
+  $titles = array(
+    'seed' => 'A relatively small amount of capital is provided to an inventor or entrepreneur to prove a specific concept.',
+    'startup' => 'Financing is provided to companies for use in product development and in initial marketing.',
+    'first' => 'Financing is provided to companies that have expended their initial capital and now require funds to initiate commercial-scale manufacturing and sales.',
+    'second' => 'Working capital is provided for the expansion of a company which is producing and shipping products and which needs to support growing accounts receivables and inventories.',
+    'third' => 'Funds are provided for the major expansion of a company which has increasing sales volume and which is breaking even or has achieved initial profitability.',
+    'bridge' => 'Financing is provided for a company expected to "go public" within six months to a year.'
+  );
+  foreach ($titles as $stage => $title) {
+    $element[$stage]['#attributes']['title'] = $element[$stage]['#title'] . ' - ' . $title;
+  }
+}
+
+/**
+* Retrieve a specific comment (with caching)
+*/
+function venture_get_comment($cid) {
+  static $comments = array();
+  if (!isset($comments[$cid])) {
+    $comments[$cid] = _comment_load($cid);
+  }
+  return $comments[$cid];
+}
+
+/**
+* Get all comments for a node
+*/
+function venture_get_comments($nid, $comments_per_page) {
+  $query_count = 'SELECT COUNT(*) FROM {comments} WHERE nid = %d';
+  $query = 'SELECT cid, uid, subject, comment, format, timestamp FROM {comments} WHERE nid = %d ORDER BY cid';
+  $result = pager_query($query, $comments_per_page, 0, $query_count, $nid);
+  
+  $comments = array();
+  while ($comment = db_fetch_object($result)) {
+    $comments[] = $comment;
+  }
+  
+  return $comments;
+}
+
+/**
+* Alter the uploaded image form
+*/
+function venture_image_alter(&$form, $field_name, $image_name) {
+  $field_name_upload = $field_name . '_upload';
+  
+  // Remove the fieldset
+  $form[$field_name]['#type'] = 'item';
+  $form[$field_name]['#theme'] = 'image_upload';
+  unset($form[$field_name]['#title']);
+  unset($form[$field_name]['#description']);
+  unset($form[$field_name]['new'][$field_name_upload]['#description']);
+  $form[$field_name]['new']['upload']['#value'] = 'Preview';
+  
+  // Clear unneeded data
+  foreach(array(0, 1) as $idx) {
+    unset($form[$field_name][$idx]['title']);
+    unset($form[$field_name][$idx]['alt']);
+    unset($form[$field_name][$idx]['description']);
+    unset($form[$field_name][$idx]['replace']);
+  }
+  
+  if ($image_name) {
+    if ($uploaded = &$form[$field_name][1]) {
+      $form[$field_name][0]['#type'] = 'value'; // Remove existing image
+    }
+  }
+  else {
+    global $user;
+    $uploaded = &$form[$field_name][0];
+    $image_name = 'temp-' . $user->uid . '-' . time(); // Generate temporary name
+  }
+  
+  if ($uploaded) {
+    // Rename uploaded file
+    $ext = array_pop(explode('.', $uploaded['filename']['#value']));
+    $uploaded['filename']['#value'] = "$image_name.$ext";
+  }
+  
+  // Display a message if the filesize exceeds maximum (imagefield
+  // code does not deal well with sizes exceeding PHP maximum)
+  if ($_FILES['files']['name'][$field_name_upload] && !file_check_upload($field_name_upload)) {
+    form_set_error($field_name_upload, 'The file you uploaded has a filesize greater than the maximum allowed.');
+  }
+}
+
+/**
+* Send an alert via email
+*/
+function venture_mail_alert($key, $user, $subject, $body) {
+  $profile = venture_profile_retrieve($user->uid);
+  if ($profile->field_email_alerts) {
+    foreach ($profile->field_email_alerts as $val) {
+      if ($val['value'] == $key) {
+        $body .= "\n\nIf you do not wish to receive email alerts, you may modify your " .
+          "notification settings on the Advanced tab of the Account page.";
+        drupal_mail("venture-$key", $user->mail, $subject, wordwrap($body, 72));
+        break;
+      }
+    }
+  }
+}
+
+/**
+* Reorder the fields within a form
+*/
+function venture_order_fields(&$form, $fields) {
+  foreach($fields as $field) {
+    $temp = $form[$field];
+    unset($form[$field]);
+    $form[$field] = $temp;
+  }
+}
+
+/**
+* Search form after_build event handler
+*/
+function venture_search_after_build($form, $form_values) {
+  // Massage dropdown type data into required format
+  $type = array($form_values['type'] => $form_values['type']);
+  form_set_value($form['advanced']['type'], $type);
+  
+  return $form;
+}
+
+/**
+* Alter the search form
+*/
+function venture_search_alter(&$form) {
+  $form['#after_build'][] = 'venture_search_after_build';
+  
+  $form['basic']['inline']['keys']['#title'] = $form['basic']['#title'];
+  unset($form['basic']['#title']);
+  
+  $form['advanced']['#type'] = 'item';
+  $form['advanced']['type']['#title'] = 'By type';
+  unset($form['advanced']['#title']);
+  unset($form['advanced']['submit']);
+  unset($form['advanced']['keywords']['#prefix']);
+  unset($form['advanced']['keywords']['#suffix']);
+  unset($form['advanced']['type']['#prefix']);
+  unset($form['advanced']['type']['#suffix']);
+  
+  // Turn type selection into dropdown
+  $form['advanced']['type']['#type'] = 'select';
+  $options = &$form['advanced']['type']['#options'];
+  $options = array(NULL => NULL) + $options;
+  unset($options['usernode']);
+}
+
+/**
+ * Custom views argument for excluding CCK values
+ * NOTE: currently not in use
+ */
+function venture_views_arguments_exclude($op, &$query, $argtype, $arg = '') {
+  if ($op == 'filter') {
+    $field = content_fields($argtype['options']);
+    $db_info = content_database_info($field);
+    $value = $db_info['columns']['value']['column'];
+    $table = 'node_data_'. $field['field_name'];
+    
+    $query->ensure_table($table);
+    $query->add_field($value, $table);
+    if ($arg == 'null') {
+      $query->add_where("$table.$value != ''", $arg);
+    }
+    else {
+      $query->add_where("$table.$value != '%s'", $arg);
+    }
+  }
+}
+
+/**
+* Custom views argument for multiple CCK values
+*/
+function venture_views_arguments_list($op, &$query, $argtype, $arg = '') {
+  if ($op == 'filter' && is_array($arg)) {
+    $field = content_fields($argtype['options']);
+    $db_info = content_database_info($field);
+    $value = $db_info['columns']['value']['column'];
+    $table = 'node_data_'. $field['field_name'];
+    $placeholders = implode(',', array_fill(0, count($arg), "'%s'"));
+    
+    $query->ensure_table($table);
+    $query->add_field($value, $table);
+    $query->add_where("$table.$value IN ($placeholders)", $arg);
+  }
+}
+
+/**
+* Get node count for a given view
+*/
+function venture_views_get_node_count($view_name, $args = array()) {
+  $count = 0;
+  $view = views_get_view($view_name);
+  $info = views_build_view('queries', $view,  $args, FALSE, 0, 0, 0, array(NULL)); // Last parameter to avoid exposed filters
+  if ($info) {
+    $cquery = db_rewrite_sql($info['countquery'], 'node', 'nid', $info['rewrite_args']);
+    $count = db_result(db_query($cquery, $info['args']));
+  }
+  return $count;
+}

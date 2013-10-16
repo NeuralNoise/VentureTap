@@ -1,0 +1,5 @@
+; $Id$
+name = VentureTap
+description = VentureTap custom module.
+package = Venture
+version = "5.x-1.0"
