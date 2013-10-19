@@ -6,6 +6,8 @@ In a nutshell
 
 VentureTap was a private invite-only social network for angel investors and venture capitalists. It was developed using Drupal CMS and a whole lot of custom PHP code. Most of the features were implemented over a period of eight months in 2008-2009, when the first invites for www.venturetap.com were sent out. It gained around 50 users, spanning 12 countries and investment ranges from under $10K to over $20M. The site ultimately did not gain enough traction and was eventually put on life support.
 
+> NOTE: The committed code represents the VentureTap custom module only and not the entirety of a Drupal installation.
+
 What's the point?
 -----------------
 
