@@ -262,7 +262,6 @@
       <li>Frederik Fleck - <a href="http://frederikfleck.com/">Frederik Fleck's Blog</a></li>
       <li>Gaston Bercun <em>(Spanish)</em> - <a href="http://bercun.com.ar/blog/">El Blog De Gaston Bercun</a></li>
       <li>Gerry Campbell - <a href="http://luckyrobot.com/">Lucky Robot</a></li>
-      <li>Gilles Dumortier <em>(French)</em> - <a href="http://www.killbill.fr/">Blog De Gilles Dumortier</a></li>
       <li>Greg Stuart - <a href="http://mansavesdog.wordpress.com/">ManSavesDog</a></li>
       <li>Herve Cuviliez - <a href="http://hervecuviliez.com/">Herve Cuviliez</a></li>
       <li>Hunter Walk - <a href="http://elapsedtime.blogspot.com/">Elapsed Time</a></li>
